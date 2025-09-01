@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% block title %}Create Account{% endblock %}
+{% block content %}
+<div class="auth-container">
+    <h1>Create Your Account</h1>
+    <p>Join Quizlyzer to start generating quizzes.</p>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" required>
+            {% if field.help_text %}
+                <p class="mt-1" style="font-size: 0.8rem; color: var(--muted-text-color);">{{ field.help_text|safe }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+                <p class="mt-1" style="font-size: 0.8rem; color: var(--error-color);">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-full">Register</button>
+    </form>
+    <p class="text-center mt-4">
+        Already have an account? <a href="{% url 'login' %}">Log In</a>
+    </p>
+</div>
+{% endblock %}

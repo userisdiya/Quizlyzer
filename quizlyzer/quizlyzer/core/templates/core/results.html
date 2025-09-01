@@ -1,0 +1,58 @@
+{% extends 'core/base.html' %}
+{% block title %}Quiz Results{% endblock %}
+{% block content %}
+{% load template_helpers %}
+<div class="dashboard-layout">
+    <aside class="sidebar">
+        <h1>Quizlyzer</h1>
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard' %}">New Quiz</a>
+            <a href="{% url 'past_history' %}">Past History</a>
+        </nav>
+        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+    </aside>
+    <main class="main-content">
+        <div class="text-center">
+            <h1>Quiz Complete!</h1>
+            <p style="font-size: 1.5rem;">You scored: <strong style="color: var(--primary-color);">{{ results.score }}%</strong></p>
+        </div>
+
+        {% if results.practice_topics %}
+        <div class="practice-area mt-4">
+            <h3>Areas to Practice</h3>
+            <p>Based on your answers, you might want to review these topics:</p>
+            <ul>
+                {% for topic in results.practice_topics %}
+                    <li>{{ topic }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="mt-4">
+            <h2>Review Your Answers</h2>
+            {% for mcq in results.mcqs %}
+            <div class="result-item">
+                <div class="result-title">Question {{ forloop.counter }}: {{ mcq.question }}</div>
+                <div class="result-content">
+                    {% for option in mcq.options %}
+                        {% if option == mcq.correct_answer %}
+                            <div class="result-option correct">{{ option }} (Correct Answer)</div>
+                        {% elif option == results.user_answers|get_item:forloop.parentloop.counter0 %}
+                            <div class="result-option incorrect">{{ option }} (Your Answer)</div>
+                        {% else %}
+                            <div class="result-option">{{ option }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mt-4 text-center">
+            <a href="{% url 'dashboard' %}" class="btn btn-primary">Generate Another Quiz</a>
+            <a href="{% url 'past_history' %}" class="btn btn-secondary">View Past History</a>
+        </div>
+    </main>
+</div>
+{% endblock %}
+

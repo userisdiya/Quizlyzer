@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+    <aside class="sidebar">
+        <h1>Quizlyzer</h1>
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard' %}" class="active">New Quiz</a>
+            <a href="{% url 'past_history' %}">Past History</a>
+        </nav>
+        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+    </aside>
+    <main class="main-content">
+        <h2>Generate a New Quiz</h2>
+        <p>Enter the topics you want to be quizzed on. You can add as many as you like.</p>
+        <form method="post">
+            {% csrf_token %}
+            <div id="topics-container">
+                <div class="form-group">
+                    <label>Topic 1</label>
+                    <input type="text" name="topics" placeholder="e.g., 'Python data types'" required>
+                </div>
+            </div>
+            <button type="button" id="add-topic-btn" class="btn btn-secondary">Add Another Topic</button>
+            <button type="submit" class="btn btn-primary">Generate Quiz</button>
+        </form>
+    </main>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const addTopicBtn = document.getElementById('add-topic-btn');
+    const topicsContainer = document.getElementById('topics-container');
+    let topicCounter = 1;
+    addTopicBtn.addEventListener('click', function() {
+        topicCounter++;
+        const newTopicDiv = document.createElement('div');
+        newTopicDiv.classList.add('form-group');
+        newTopicDiv.innerHTML = `
+            <label>Topic ${topicCounter}</label>
+            <input type="text" name="topics" placeholder="Enter another topic" required>
+        `;
+        topicsContainer.appendChild(newTopicDiv);
+    });
+});
+</script>
+{% endblock %}

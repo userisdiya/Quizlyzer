@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizlyzer - {% block title %}{% endblock %}</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5; --secondary-color: #9333ea;
+            --background-color: #f3f4f6; --surface-color: #ffffff;
+            --text-color: #1f2937; --muted-text-color: #6b7280;
+            --border-color: #d1d5db; --success-color: #10b981; --error-color: #ef4444;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+        body { margin: 0; font-family: var(--font-sans); background-color: var(--background-color); color: var(--text-color); font-size: 16px; }
+        .container { max-width: 800px; margin: 2rem auto; padding: 2rem; background-color: var(--surface-color); border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .auth-container { max-width: 400px; margin: 5rem auto; padding: 2rem; background-color: var(--surface-color); border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { font-size: 2.25rem; font-weight: bold; margin-bottom: 1rem; }
+        h2 { font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .form-group input { width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: 6px; box-sizing: border-box; }
+        .btn { display: inline-block; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; font-weight: 600; text-decoration: none; cursor: pointer; text-align: center; }
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-secondary { background-color: var(--secondary-color); color: white; }
+        .btn-full { width: 100%; }
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 0.25rem; } .mt-2 { margin-top: 0.5rem; } .mt-4 { margin-top: 1rem; }
+        .dashboard-layout { display: flex; height: 100vh; }
+        .sidebar { width: 250px; background-color: #e5e7eb; padding: 1.5rem; display: flex; flex-direction: column; }
+        .sidebar h1 { font-size: 1.75rem; margin-bottom: 2rem; }
+        .sidebar-nav { flex-grow: 1; }
+        .sidebar-nav a { display: block; padding: 0.75rem 1rem; text-decoration: none; color: var(--text-color); border-radius: 6px; margin-bottom: 0.5rem; }
+        .sidebar-nav a.active, .sidebar-nav a:hover { background-color: var(--primary-color); color: white; }
+        .main-content { flex-grow: 1; padding: 2rem; overflow-y: auto; }
+        .quiz-option { display: block; padding: 1rem; border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 0.75rem; cursor: pointer; }
+        .quiz-option:hover { background-color: #eef2ff; }
+        .quiz-option input { margin-right: 0.75rem; }
+        .result-item { border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 1rem; }
+        .result-title { padding: 1rem; font-weight: bold; cursor: pointer; }
+        .result-content { padding: 1rem; border-top: 1px solid var(--border-color); }
+        .result-option { padding: 0.5rem; border-radius: 4px; margin-bottom: 0.25rem; }
+        .correct { background-color: #d1fae5; }
+        .incorrect { background-color: #fee2e2; }
+        .practice-area { background-color: #fef3c7; padding: 1.5rem; border-radius: 8px; border: 1px solid #fcd34d; }
+        .history-table { width: 100%; border-collapse: collapse; }
+        .history-table th, .history-table td { padding: 0.75rem; border: 1px solid var(--border-color); text-align: left; }
+        .history-table th { background-color: #f3f4f6; }
+    </style>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>

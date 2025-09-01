@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="auth-container">
+    <h1>Welcome Back!</h1>
+    <p>Log in to continue generating quizzes.</p>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" required>
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-full">Login</button>
+    </form>
+    <p class="text-center mt-4">
+        Don't have an account? <a href="{% url 'register' %}">Sign Up</a>
+    </p>
+</div>
+{% endblock %}

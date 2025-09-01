@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block title %}Take Quiz{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Quiz Time!</h1>
+    <form method="post" action="{% url 'submit_quiz' %}">
+        {% csrf_token %}
+        {% for index, mcq in indexed_mcqs %}
+            <div class="form-group">
+                <h2>Question {{ forloop.counter }}: {{ mcq.question }}</h2>
+                {% for option in mcq.options %}
+                <label class="quiz-option">
+                    <input type="radio" name="question_{{ index }}" value="{{ option }}" required>
+                    {{ option }}
+                </label>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary btn-full">Submit All Answers</button>
+    </form>
+</div>
+{% endblock %}
